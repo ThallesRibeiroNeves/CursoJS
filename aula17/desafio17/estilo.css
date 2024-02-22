@@ -17,8 +17,12 @@ section{
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.499);
 }
 
+select#flista{
+    width: 150px;
+}
+
 div {
-    text-align: center;
+    text-align: left;
     padding: 5px;
 }
 
