@@ -17,7 +17,8 @@
     <script>
         const canvasEl = document.querySelector("canvas")
         const canvasCtx = canvasEl.getContext("2d")
-
+        gapX = 10
+            
         const lineWidth = 15
 
         const field = {
@@ -39,6 +40,55 @@
             },
         }
 
+        const leftPaddle = {
+            x: gapX,
+            y: 0,
+            w: line.w,
+            h: 200,
+            draw: function() {
+                canvasCtx.fillStyle = "#ffffff"
+                canvasCtx.fillRect(this.x, this.y, this.w, this.h)  
+            }
+        }
+
+        const rightPaddle = {
+          x: field.w - line.w - gapX,
+          y: 100,
+          w: line.w,
+          h: 200,
+          draw: function (){
+            canvasCtx.fillStyle = "#ffffff"
+                canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+          }  
+        }
+
+        const score = {
+          human: 1,
+          computer: 2,  
+          draw: function(){
+        canvasCtx.font = "bold 72px Arial"
+        canvasCtx.textAlign = "center"
+        canvasCtx.textBaseline = "top"
+        canvasCtx.fillStyle = "#01341D"
+        canvasCtx.fillText(this.human, field.w / 4, 50)
+        canvasCtx.fillText(this.computer, field.w / 4 + field.w / 2, 50)
+
+          }  
+        }
+
+        const ball = {
+          x: 370,
+          y: 100,
+          r: 20,
+          draw: function(){
+        canvasCtx.fillStyle = "#ffffff"    
+        canvasCtx.beginPath()    
+        canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false)
+        canvasCtx.fill() 
+          }
+        
+        }
+
         function setup(){
             canvasEl.width = canvasCtx.width = field.w
             canvasEl.height = canvasCtx.height = field.h
@@ -47,26 +97,11 @@
         function draw(){
            field.draw()
            line.draw()
-          
-
-        //raquete esquerda
-        canvasCtx.fillRect(10, 100, lineWidth, 200)
-
-        //raquete direita
-        canvasCtx.fillRect(window.innerWidth- lineWidth -10, 200, lineWidth, 200)
-
-        //bolinha
-        canvasCtx.beginPath()    
-        canvasCtx.arc(500, 300, 20, 0, 2 * Math.PI, false)
-        canvasCtx.fill()
-
-        //placar
-        canvasCtx.font = "bold 72px Arial"
-        canvasCtx.textAlign = "center"
-        canvasCtx.textBaseline = "top"
-        canvasCtx.fillStyle = "#01341D"
-        canvasCtx.fillText("3", window.innerWidth / 4, 50)
-        canvasCtx.fillText("1", window.innerWidth / 4 + window.innerWidth / 2, 50)
+           leftPaddle.draw()
+           rightPaddle.draw()
+           score.draw()
+           ball.draw()
+      
         }
 
 
